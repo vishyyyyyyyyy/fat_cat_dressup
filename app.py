@@ -1,6 +1,7 @@
 from flask import Flask, render_template, session, redirect, url_for, request
+import os
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static', static_folder='static')
 app.secret_key = 'fat_cat_dress_up'
 
 @app.route('/')
@@ -38,4 +39,7 @@ def reset():
     return redirect(url_for('home'))
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    # Get PORT from environment, default to 5000 locally
+    port = int(os.environ.get("PORT", 5000))
+    # Listen on all interfaces so Render can route traffic
+    app.run(host="0.0.0.0", port=port, debug=True)
