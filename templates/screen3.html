@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Tailwind CSS CDN for styling -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Define a custom aspect ratio if needed, or rely on w/h directly */
+    .aspect-ratio-596x368 {
+      aspect-ratio: 596 / 368; /* Calculated from background image dimensions */
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-purple-200 via-pink-200 to-blue-200 flex items-center justify-center p-4">
+
+  <!-- Main container -->
+  <div class="relative max-w-lg w-full aspect-video flex items-center justify-center">
+
+    <!-- Background Pink Rectangle -->
+    <img src="{{ url_for('static', filename='images/Background.png') }}" />
+
+    <!-- Cat dressup area background -->
+    <img
+      src="{{ url_for('static', filename='images/cat_display_back.png') }}"
+      class="absolute top-[33px] right-[105px] w-full h-full object-contain scale-[0.65]"
+    />
+
+    <!-- Cat dressup overlay -->
+    <img
+      src="{{ url_for('static', filename='images/cat_display_overlay.png') }}"
+      class="absolute top-[35px] right-[105px] w-full h-full object-contain scale-[0.62]"
+    />
+
+    <!-- Colored cat image — absolutely positioned -->
+   <img
+  src="{{ url_for('static', filename='images/cat_' + selected_color + '.png') }}"
+  alt="Your cat"
+  class="absolute top-[13px] right-[20px] -translate-x-1/2 -translate-y-1/5 w-3/4 md:w-2/3 h-auto object-contain scale-75"
+/>
+
+
+    <!-- User choices area -->
+    <img
+      src="{{ url_for('static', filename='images/user_options_panel.png') }}"
+      class="absolute top-[33px] right-0 left-[140px] w-full h-full object-contain scale-[0.65]"
+    />
+
+    <img
+      src="{{ url_for('static', filename='images/accessories.png') }}"
+      class="absolute bottom-[48px] right-0 left-[142px] w-full h-full object-contain scale-[0.28]"
+    />
+
+    <!-- GLASSES BUTTON -->
+    <button
+     onclick="toggleAccessory('glasses')" 
+     class="absolute top-[130px] left-[300px] w-[81px] h-[81px] z-50">
+    <img 
+    src="{{ url_for('static', filename='images/glasses_button.png') }}" 
+    class="w-full h-full object-contain" alt="glasses" />
+    </button>
+
+    <!-- NECKLACE BUTTON -->
+    <button onclick="toggleAccessory('necklace')" 
+    class="absolute top-[126px] left-[365px] w-[70px] h-[80px] z-50">
+    <img src="{{ url_for('static', filename='images/necklace_button.png') }}"
+     class="w-full h-full object-contain" alt="necklace" />
+    </button>
+
+  <button
+  onclick="toggleAccessory('tie')"
+  class="absolute top-[110px] left-[410px] w-[100px] h-[100px] z-50 p-0 m-0">
+  <div class="w-full h-full flex items-center justify-center overflow-hidden">
+    <img
+      src="{{ url_for('static', filename='images/tie_button.png') }}"
+      class="scale-[1.3] object-contain w-[100%] h-[100%]"
+      alt="tie"
+    />
+  </div>
+</button>
+
+
+<!-- EYELASHES BUTTON -->
+<button onclick="toggleAccessory('eyelashes')"
+class="absolute top-[187px] left-[418px] w-[90px] h-[85px] z-50">
+  <img src="{{ url_for('static', filename='images/eyelashes_button.png') }}" 
+  class="scale-[1.3]  object-contain" alt="eyelashes" />
+</button>
+
+<!-- FLOWER BUTTON -->
+<button onclick="toggleAccessory('flower')" 
+class="absolute top-[195px] left-[275px] w-[100px] h-[100px] z-50 p-0 m-0">
+  <img src="{{ url_for('static', filename='images/flower_button.png') }}" 
+  class="scale-[1.5] object-contain w-[100%] h-[100%]" alt="flower" />
+</button>
+
+<!-- EYEPATCH BUTTON -->
+<button onclick="toggleAccessory('eyepatch')" 
+class="absolute top-[186px] left-[357px] w-[86px] h-[86px] z-50">
+  <img src="{{ url_for('static', filename='images/eyepatch_button.png') }}" 
+  class="w-full h-full object-contain" alt="eyepatch" />
+</button>
+
+
+    <!-- Accessories: initially hidden -->
+    <img
+     id="glasses"
+    src="{{ url_for('static', filename='images/glasses.png') }}"
+    class="absolute top-[13px] right-[20px] -translate-x-1/2 -translate-y-1/5 w-3/4 md:w-2/3 h-auto object-contain scale-75 hidden"
+    />
+
+    <img
+    id="necklace"
+    src="{{ url_for('static', filename='images/necklace.png') }}"
+    class="absolute top-[13px] right-[20px] -translate-x-1/2 -translate-y-1/5 w-3/4 md:w-2/3 h-auto object-contain scale-75 hidden"
+    />
+
+    <img
+    id="tie"
+    src="{{ url_for('static', filename='images/tie.png') }}"
+    class="absolute top-[13px] right-[20px] -translate-x-1/2 -translate-y-1/5 w-3/4 md:w-2/3 h-auto object-contain scale-75 hidden"
+    />
+
+     <img
+    id="eyelashes"
+    src="{{ url_for('static', filename='images/eyelashes.png') }}"
+    class="absolute top-[13px] right-[20px] -translate-x-1/2 -translate-y-1/5 w-3/4 md:w-2/3 h-auto object-contain scale-75 hidden"
+    />
+
+     <img
+    id="flower"
+    src="{{ url_for('static', filename='images/flower.png') }}"
+    class="absolute top-[13px] right-[20px] -translate-x-1/2 -translate-y-1/5 w-3/4 md:w-2/3 h-auto object-contain scale-75 hidden"
+    />
+     <img
+    id="eyepatch"
+    src="{{ url_for('static', filename='images/eyepatch.png') }}"
+    class="absolute top-[13px] right-[20px] -translate-x-1/2 -translate-y-1/5 w-3/4 md:w-2/3 h-auto object-contain scale-75 hidden"
+    />
+
+
+
+
+
+
+    <!-- Next page button -->
+    <!-- Hidden form -->
+<form id="accessoryForm" method="POST" action="/your_fat_cat" style="display:none;">
+  <input type="hidden" name="accessories" id="accessoryInput" />
+</form>
+
+
+<!-- Styled button that replaces your <a> -->
+<button
+  onclick="submitAccessories()"
+  class="absolute top-[250px] left-[365px] w-[70px] cursor-pointer transition-transform duration-300 ease-in-out hover:scale-105 z-50"
+>
+  <img
+    src="{{ url_for('static', filename='images/button.png') }}"
+    alt="Next"
+    class="w-full h-auto object-contain"
+  />
+  <img
+    src="{{ url_for('static', filename='images/Next.png') }}"
+    alt="Next Text"
+    class="absolute inset-0 top-[-4px] w-full h-full object-contain scale-[0.65] pointer-events-none"
+  />
+</button>
+
+    <!-- Background for title -->
+    <img
+      src="{{ url_for('static', filename='images/title_container.png') }}"
+      class="absolute bottom-[115px] right-0 w-full h-full object-contain scale-90"
+    />
+
+    <!-- Title text -->
+    <img
+      src="{{ url_for('static', filename='images/title2.png') }}"
+      class="absolute bottom-[255px] left-1/2 -translate-x-1/2 -translate-y-1/5 w-3/4 md:w-2/3 h-auto object-contain scale-110"
+    />
+  </div>
+
+  <script>
+  function toggleAccessory(id) {
+  const el = document.getElementById(id);
+  el.classList.toggle('hidden');
+}
+
+// This function runs when Next button is clicked
+function submitAccessories() {
+  // Get all accessory image elements (the ones that toggle)
+  const accessoryIds = ['glasses', 'necklace', 'tie', 'eyelashes', 'flower', 'eyepatch'];
+
+  // Filter the ones currently visible (i.e., not hidden)
+  const selected = accessoryIds.filter(id => {
+    const el = document.getElementById(id);
+    return el && !el.classList.contains('hidden');
+  });
+
+  // Put selected accessories as comma-separated string in hidden input
+  document.getElementById('accessoryInput').value = selected.join(',');
+
+  // Submit the hidden form
+  document.getElementById('accessoryForm').submit();
+}
+
+  </script>
+
+</body>
+</html>

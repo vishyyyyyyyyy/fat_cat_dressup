@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .aspect-ratio-596x368 {
+      aspect-ratio: 596 / 368;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-purple-200 via-pink-200 to-blue-200 flex items-center justify-center p-4">
+
+  <div class="relative max-w-lg w-full aspect-video flex items-center justify-center">
+
+    <!-- Background -->
+    <img src="{{ url_for('static', filename='images/Background.png') }}" />
+
+    <!-- Cat display area -->
+    <img src="{{ url_for('static', filename='images/cat_display_back.png') }}" class="absolute top-[33px] right-[105px] w-full h-full object-contain scale-[0.65]" />
+    <img src="{{ url_for('static', filename='images/cat_display_overlay.png') }}" class="absolute top-[35px] right-[105px] w-full h-full object-contain scale-[0.62]" />
+
+    <!-- Cat image that updates -->
+    <img
+      id="cat-image"
+      src="{{ url_for('static', filename='images/blank_cat.png') }}"
+      class="absolute top-[13px] right-[20px] -translate-x-1/2 -translate-y-1/5 w-3/4 md:w-2/3 h-auto object-contain scale-75"
+    />
+
+    <!-- UI Panels -->
+    <img src="{{ url_for('static', filename='images/user_options_panel.png') }}" class="absolute top-[33px] right-0 left-[140px] w-full h-full object-contain scale-[0.65]" />
+    <img src="{{ url_for('static', filename='images/fur_color_title.png') }}" class="absolute bottom-[48px] right-0 left-[142px] w-full h-full object-contain scale-[0.28]" />
+
+    <!-- Hidden form with JS-controlled input -->
+    <form id="colorForm" method="POST" action="{{ url_for('dressup') }}">
+      <input type="hidden" name="color" id="colorInput" />
+    </form>
+
+    <!-- Color Buttons -->
+    <button
+      onclick="changeCatColor('cat_brown.png', 'brown')"
+      class="absolute top-[33px] right-0 left-[80px] w-full h-full scale-[0.15] z-50"
+    >
+      <img src="{{ url_for('static', filename='images/brown_block.png') }}" class="w-full h-full object-contain" alt="Brown fur" />
+    </button>
+
+    <button
+      onclick="changeCatColor('cat_orange.png', 'orange')"
+      class="absolute top-[33px] right-0 left-[140px] w-full h-full scale-[0.15] z-50"
+    >
+      <img src="{{ url_for('static', filename='images/orange_block.png') }}" class="w-full h-full object-contain" alt="Orange fur" />
+    </button>
+
+    <button
+      onclick="changeCatColor('cat_gray.png', 'gray')"
+      class="absolute top-[33px] right-0 left-[200px] w-full h-full scale-[0.15] z-50"
+    >
+      <img src="{{ url_for('static', filename='images/gray_block.png') }}" class="w-full h-full object-contain" alt="Gray fur" />
+    </button>
+
+    <!-- Next button -->
+    <button
+      type="button"
+      onclick="submitColor()"
+      class="relative block w-[70px] h-auto cursor-pointer transition-transform duration-300 ease-in-out hover:scale-105"
+      style="top: 250px; left: 365px; position: absolute;"
+    >
+      <img src="{{ url_for('static', filename='images/button.png') }}" alt="Accessorize" class="w-full h-auto object-contain" />
+      <img src="{{ url_for('static', filename='images/Next.png') }}" alt="Next" class="absolute inset-0 top-[-4px] w-full h-full object-contain scale-[0.65] pointer-events-none" />
+    </button>
+
+    <!-- Title section -->
+    <img src="{{ url_for('static', filename='images/title_container.png') }}" class="absolute bottom-[115px] right-0 w-full h-full object-contain scale-90" />
+    <img src="{{ url_for('static', filename='images/title2.png') }}" class="absolute bottom-[255px] left-1/2 -translate-x-1/2 -translate-y-1/5 w-3/4 md:w-2/3 h-auto object-contain scale-110" />
+  </div>
+
+  <script>
+    let selectedColor = '';
+
+    function changeCatColor(filename, color) {
+      document.getElementById('cat-image').src = `/static/images/${filename}`;
+      selectedColor = color;
+    }
+
+    function submitColor() {
+      if (!selectedColor) {
+        alert('Please select a fur color before continuing.');
+        return;
+      }
+      document.getElementById('colorInput').value = selectedColor;
+      document.getElementById('colorForm').submit();
+    }
+  </script>
+</body>
+</html>

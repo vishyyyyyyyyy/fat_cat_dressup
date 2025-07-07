@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fat Cat Dress Up! </title>
+  <style>
+    body {
+      background-color: #fff0f5; /* pastel pink */
+      font-family: 'Comic Sans MS', cursive;
+      text-align: center;
+      padding: 20px;
+    }
+    #cat-container {
+      position: relative;
+      width: 1080px;
+      height: 1080px;
+    }
+    .layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+    button {
+      background-color: #ffccdd;
+      border: none;
+      color: #333;
+      padding: 12px 24px;
+      margin: 8px;
+      font-size: 16px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    button:hover {
+      background-color: #ffc0cb;
+      transform: scale(1.05);
+    }
+
+  </style>
+</head>
+<body>
+
+  <h1>Dress Up the Fat Cat 🐱</h1>
+
+  <div id="cat-container">
+    <img src="{{ url_for('static', filename='images/blank_cat.png') }}" class="layer" id="cat">
+    <img src="" class="layer" id="accessory">
+  </div>
+
+  <button onclick="dressCat('glasses.png')">Hat</button>
+  <button onclick="dressCat('tie.png')">Bowtie</button>
+  <button onclick="dressCat('')">Remove</button>
+
+  <script>
+    function dressCat(item) {
+      document.getElementById("accessory").src = item ? `/static/images/${item}` : "";
+    }
+  </script>
+</body>
+</html>

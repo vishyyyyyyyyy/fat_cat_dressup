@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Custom aspect ratio if needed */
+    .aspect-ratio-596x368 {
+      aspect-ratio: 596 / 368;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-purple-200 via-pink-200 to-blue-200 flex items-center justify-center p-4">
+
+  <div class="relative max-w-lg w-full aspect-video flex items-center justify-center">
+
+    <!-- Background -->
+    <img src="{{ url_for('static', filename='images/Background.png') }}" />
+
+    <!-- Cat background -->
+    <img
+      src="{{ url_for('static', filename='images/cat_display_back.png') }}"
+      class="absolute top-[33px] right-[105px] w-full h-full object-contain scale-[0.65]"
+    />
+
+    <!-- Cat overlay -->
+    <img
+      src="{{ url_for('static', filename='images/cat_display_overlay.png') }}"
+      class="absolute top-[35px] right-[105px] w-full h-full object-contain scale-[0.62]"
+    />
+
+    <!-- Base cat -->
+    <img
+      src="{{ url_for('static', filename='images/cat_' + selected_color + '.png') }}"
+      alt="Cat"
+      class="absolute top-[13px] right-[20px] -translate-x-1/2 -translate-y-1/5 w-3/4 md:w-2/3 h-auto object-contain scale-75"
+    />
+<!--user panel-->
+     <img
+      src="{{ url_for('static', filename='images/screen4_user_panel.png') }}"
+      class="absolute top-[33px] right-0 left-[140px] w-full h-full object-contain scale-[0.65]"
+    />
+
+     <button
+  type="button"
+  onclick="window.location.href='/reset'"
+  class="relative block w-[70px] h-auto cursor-pointer transition-transform duration-300 ease-in-out hover:scale-105"
+  style="top: 240px; left: 407px; position: absolute;"
+>
+  <img src="{{ url_for('static', filename='images/redo_button.png') }}" alt="Restart" class="w-full h-auto object-contain" />
+</button>
+
+
+    <!-- Loop accessories -->
+    {% for accessory in accessories %}
+    <img
+      src="{{ url_for('static', filename='images/' + accessory + '.png') }}"
+      alt="{{ accessory }}"
+      class="absolute top-[13px] right-[20px] -translate-x-1/2 -translate-y-1/5 w-3/4 md:w-2/3 h-auto object-contain scale-75"
+    />
+    {% endfor %}
+
+    <!-- Title and UI elements -->
+    <img
+      src="{{ url_for('static', filename='images/title_container.png') }}"
+      class="absolute bottom-[115px] right-0 w-full h-full object-contain scale-90"
+    />
+
+    <img
+      src="{{ url_for('static', filename='images/title2.png') }}"
+      class="absolute bottom-[255px] left-1/2 -translate-x-1/2 -translate-y-1/5 w-3/4 md:w-2/3 h-auto object-contain scale-110"
+    />
+
+  </div>
+
+</body>
+</html>
