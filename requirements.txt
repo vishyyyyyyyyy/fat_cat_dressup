@@ -6,6 +6,7 @@ colorama==0.4.6
 filelock==3.18.0
 Flask==3.1.1
 fsspec==2025.5.1
+gunicorn
 idna==3.10
 imageio==2.37.0
 itsdangerous==2.2.0
